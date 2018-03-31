@@ -25,26 +25,32 @@
 
 package Graph;
 
-import Graph.*;
 import Model.ModelConstants;
 
-/** Provides Autonomous System (AS) attributes to an Edge. */
+/**
+ * Provides Autonomous System (AS) attributes to an Edge.
+ */
 public final class ASEdgeConf extends EdgeConf {
-  //public int ASType;
-  
-  
-  public ASEdgeConf() {
-    edgeType = ModelConstants.E_AS;
-  }
-  
-  public ASEdgeConf(int type) {
-    edgeType = type;
-  }
-  
+    //public int ASType;
 
-  public int getType() { return edgeType; }
-  public void setType(int t) { edgeType = t; }
-  
+
+    public ASEdgeConf() {
+        edgeType = ModelConstants.E_AS;
+    }
+
+    public ASEdgeConf(int type) {
+        edgeType = type;
+    }
+
+
+    public int getType() {
+        return edgeType;
+    }
+
+    public void setType(int t) {
+        edgeType = t;
+    }
+
 }
 
 

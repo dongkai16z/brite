@@ -25,19 +25,20 @@
 
 package Import;
 
-/** ImportConstants serves as a repository of constants that deal with
-    importing topologies from different formats.
-*/
+/**
+ * ImportConstants serves as a repository of constants that deal with
+ * importing topologies from different formats.
+ */
 
 public final class ImportConstants {
 
-  public static int BRITE_FORMAT= 1;
-  public static int GTITM_FORMAT =2;
-  public static int NLANR_FORMAT =3;
-  public static int SCAN_FORMAT =4;
-  public static int GTITMts_FORMAT = 5;  
-  public static int INET_FORMAT = 6;
-  public static int SKITTER_FORMAT = 7;
-    
+    public static int BRITE_FORMAT = 1;
+    public static int GTITM_FORMAT = 2;
+    public static int NLANR_FORMAT = 3;
+    public static int SCAN_FORMAT = 4;
+    public static int GTITMts_FORMAT = 5;
+    public static int INET_FORMAT = 6;
+    public static int SKITTER_FORMAT = 7;
+
 }
 

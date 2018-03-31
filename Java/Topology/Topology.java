@@ -25,37 +25,42 @@
 
 package Topology;
 
-import Graph.*;
-import Model.*;
-import Export.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import Graph.Graph;
+import Model.Model;
 
 
 public final class Topology {
 
     Graph g;
     Model m;
-    
+
     public Topology(Model m) {
-	this.m = m;
-	g = m.Generate();
+        this.m = m;
+        g = m.Generate();
     }
-        
-    public Topology(Graph g) { 
-	this.g = g;
+
+    public Topology(Graph g) {
+        this.g = g;
     }
 
     public void dumpToOutput() {
-	System.out.println("Dumping topology:");
-	System.out.println(m.toString());
-	System.out.println(g);
-	g.dumpToOutput();
+        System.out.println("Dumping topology:");
+        System.out.println(m.toString());
+        System.out.println(g);
+        g.dumpToOutput();
     }
 
-    public Model getModel() { return this.m; };
-    public Graph getGraph() { return this.g; };
+    public Model getModel() {
+        return this.m;
+    }
+
+    ;
+
+    public Graph getGraph() {
+        return this.g;
+    }
+
+    ;
 
 
 }

@@ -32,84 +32,96 @@ import Model.ModelConstants;
 import java.util.ArrayList;
 
 /**
-   provides Autonomous System (AS) level attributes to a Node
+ * provides Autonomous System (AS) level attributes to a Node
  */
 public final class ASNodeConf extends NodeConf {
-    int  asType; 
-    Topology t; 
+    int asType;
+    Topology t;
 
     /*constructors*/
-    public ASNodeConf() { 
-	super(); 
-	this.asType = ModelConstants.AS_NODE;
+    public ASNodeConf() {
+        super();
+        this.asType = ModelConstants.AS_NODE;
     }
-    
+
     public ASNodeConf(int x, int y, int z) {
-	super();
-	this.x = x; this.y = y; this.z = z;
-	this.asType = ModelConstants.AS_NODE;
+        super();
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.asType = ModelConstants.AS_NODE;
     }
-    
+
     //this constructor used by BriteImport
     public ASNodeConf(int x, int y, int z, int type) {
-	super();
-	this.x = x; this.y = y; this.z = z;
-	this.asType = type;
+        super();
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.asType = type;
     }
-    
-    public ASNodeConf(int asType) { 
-	super(); 
-	this.asType = asType;
-    };
 
-    public ASNodeConf(int asType, Topology routerT) { 
-	super(); 
-	this.asType = asType; 
-	t=routerT; 
+    public ASNodeConf(int asType) {
+        super();
+        this.asType = asType;
     }
-    
+
+    ;
+
+    public ASNodeConf(int asType, Topology routerT) {
+        super();
+        this.asType = asType;
+        t = routerT;
+    }
+
     public ASNodeConf(Topology t) {
-	super(); 
-	this.t = t;
-	this.asType = ModelConstants.AS_NODE;
+        super();
+        this.t = t;
+        this.asType = ModelConstants.AS_NODE;
     }
-    
+
     /*toString() method*/
     //public String toString() {
     // }
 
-    
+
     /*get methods*/
-    public int getType() { return asType; }
-    public Topology getTopology() { return t; }
+    public int getType() {
+        return asType;
+    }
+
+    public Topology getTopology() {
+        return t;
+    }
 
     /*set methods*/
-    public void setType(int t) { this.asType =t; }
-    public void setTopology(Topology t, int asID) { 
-	this.t = t; 
-	setASIDForTopology(asID);
+    public void setType(int t) {
+        this.asType = t;
     }
-    
+
+    public void setTopology(Topology t, int asID) {
+        this.t = t;
+        setASIDForTopology(asID);
+    }
+
     /**
-     *
-     *Helper function for TopDownHier Model,  basically go thru subgraph
-     *(routers) of this AS node, and assign each member router this as
-     *id.
-     *
+     * Helper function for TopDownHier Model,  basically go thru subgraph
+     * (routers) of this AS node, and assign each member router this as
+     * id.
      */
     public void setASIDForTopology(int asID) {
-	Graph g = t.getGraph();
-	ArrayList nodes = g.getNodesVector();
-	int size = nodes.size();
-	for (int i=0; i<size; ++i) {
-	    Node n = (Node) nodes.get(i);
-	    if (n.getNodeConf() instanceof RouterNodeConf) {
-		((RouterNodeConf)n.getNodeConf()).setCorrAS(asID);
-	    }
-	}
+        Graph g = t.getGraph();
+        ArrayList nodes = g.getNodesVector();
+        int size = nodes.size();
+        for (int i = 0; i < size; ++i) {
+            Node n = (Node) nodes.get(i);
+            if (n.getNodeConf() instanceof RouterNodeConf) {
+                ((RouterNodeConf) n.getNodeConf()).setCorrAS(asID);
+            }
+        }
 
     }
-    
+
 }
 
 

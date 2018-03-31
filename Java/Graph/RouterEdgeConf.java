@@ -25,33 +25,41 @@
 
 package Graph;
 
-import Graph.*;
 import Model.ModelConstants;
 
 /**
-   Provides Router Level attributes to an Edge.
+ * Provides Router Level attributes to an Edge.
  */
 public final class RouterEdgeConf extends EdgeConf {
 
-  
+
     public float delay;
-    
+
     public RouterEdgeConf() {
-	edgeType = ModelConstants.E_RT;
+        edgeType = ModelConstants.E_RT;
     }
 
     public RouterEdgeConf(float delay, int type) {
-	edgeType = type;
-	this.delay = delay;
+        edgeType = type;
+        this.delay = delay;
     }
-  
-  //(inherited from parent)
- public int getType() { return edgeType;    }
- public void setType(int t) { edgeType = t; }
-  
-  public double getDelay() { return delay; }
-  
-  public void setDelay(float d) { this.delay = d; }
+
+    //(inherited from parent)
+    public int getType() {
+        return edgeType;
+    }
+
+    public void setType(int t) {
+        edgeType = t;
+    }
+
+    public double getDelay() {
+        return delay;
+    }
+
+    public void setDelay(float d) {
+        this.delay = d;
+    }
 
 
 }

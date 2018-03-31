@@ -28,51 +28,75 @@ package Graph;
 import Model.*;
 
 /**
-   Provides router specific attributes to a Node
+ * Provides router specific attributes to a Node
  */
 public final class RouterNodeConf extends NodeConf {
-    int  rtType; 
+    int rtType;
     int asID;   //The AS that this router belongs to
-    
-    public RouterNodeConf() { 
-	super(); 
-	this.asID = -1;
-	this.rtType = ModelConstants.RT_NODE;
+
+    public RouterNodeConf() {
+        super();
+        this.asID = -1;
+        this.rtType = ModelConstants.RT_NODE;
     }
 
     /*constructors*/
-    public RouterNodeConf(int x, int y, int z) { 
-	super(); 
-	this.x = x; this.y=y; this.z=z;
-	this.asID=-1;
-	this.rtType = ModelConstants.RT_NODE;
+    public RouterNodeConf(int x, int y, int z) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.asID = -1;
+        this.rtType = ModelConstants.RT_NODE;
     }
+
     //this constructor used by BriteImport
     public RouterNodeConf(int x, int y, int z, int asID, int type) {
-	super();
-	this.x =x; this.y = y; this.z = z;
-	this.asID = asID;
-	this.rtType = type;
-      
-    }
-    
-  //used by GTITM-Transit Stub import
-  public RouterNodeConf(int x, int y, int z, int asID) {
-    super();
-    this.x = x;this.y=y; this.z=z;this.asID = asID;
-  }
+        super();
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.asID = asID;
+        this.rtType = type;
 
-    
+    }
+
+    //used by GTITM-Transit Stub import
+    public RouterNodeConf(int x, int y, int z, int asID) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.asID = asID;
+    }
+
+
     /*get methods*/
-    public int  getType() { return rtType; }
-    public int getCorrAS() { return asID; }
-    public int getASID() { return asID; }  //alias function
+    public int getType() {
+        return rtType;
+    }
+
+    public int getCorrAS() {
+        return asID;
+    }
+
+    public int getASID() {
+        return asID;
+    }  //alias function
 
     /*set methods*/
-    public void setType(int t) { rtType =t; }
-    public void setCorrAS(int id) { asID = id; }
-    public void setASID(int id) { setCorrAS(id); } //some think this is more intuitive
-    
+    public void setType(int t) {
+        rtType = t;
+    }
+
+    public void setCorrAS(int id) {
+        asID = id;
+    }
+
+    public void setASID(int id) {
+        setCorrAS(id);
+    } //some think this is more intuitive
+
 }
 
 

@@ -34,181 +34,183 @@ import Util.*;
 import java.io.*;
 import java.util.HashMap;
 
-/** 
-    Functionality to import topologies that are saved in Inet format
-    (*.inet files) into our graph data structures.  We use an
-    undirected graph to represent Inet topologies.
-    
-    Generally, all Import routines would be called by the
-    Model.FileModel class.  However, if you only need to import the
-    Graph and not the Model parameters, you can simply call the
-    <code>parse</code> method to obtain the Graph.  The model paramters
-    can be access by the <code>getFormatParams</code> method.<p>
-    
-    All NodeIDs are reinitialized to native BRITE id. A mapping between
-    the actual IDs and the new assigned BRITE Ids are stored in a
-    hashmap <code> id2id </code> with key as the actual IDs and values
-    as the BRITE ids.  You can access this mapping by the
-    <code>getIDMap()</code> method.
-    
+/**
+ * Functionality to import topologies that are saved in Inet format
+ * (*.inet files) into our graph data structures.  We use an
+ * undirected graph to represent Inet topologies.
+ * <p>
+ * Generally, all Import routines would be called by the
+ * Model.FileModel class.  However, if you only need to import the
+ * Graph and not the Model parameters, you can simply call the
+ * <code>parse</code> method to obtain the Graph.  The model paramters
+ * can be access by the <code>getFormatParams</code> method.<p>
+ * <p>
+ * All NodeIDs are reinitialized to native BRITE id. A mapping between
+ * the actual IDs and the new assigned BRITE Ids are stored in a
+ * hashmap <code> id2id </code> with key as the actual IDs and values
+ * as the BRITE ids.  You can access this mapping by the
+ * <code>getIDMap()</code> method.
  */
 public class InetImport {
     private BufferedReader br;
     Graph g;
-    String formatParams=""; 
+    String formatParams = "";
     boolean isAS;
     HashMap id2id;
 
 
     /**
-       Class Constructor: Creates a constructor to import either a
-       router-level or an AS-level topology from a specified file.
-       @param inFile the file to import the topology from
-       @param type Either ModelConstants.AS_FILE or ModelConstants.RT_FILE 
-    */
+     * Class Constructor: Creates a constructor to import either a
+     * router-level or an AS-level topology from a specified file.
+     *
+     * @param inFile the file to import the topology from
+     * @param type   Either ModelConstants.AS_FILE or ModelConstants.RT_FILE
+     */
     public InetImport(File inFile, int type) {
-	try {
-	    br = new BufferedReader(new FileReader(inFile));
-	}
-	catch (IOException e) {
-	    Util.ERR("Error reading from file " + e);
-	    
-	}
+        try {
+            br = new BufferedReader(new FileReader(inFile));
+        } catch (IOException e) {
+            Util.ERR("Error reading from file " + e);
+
+        }
         g = new Graph();
-	id2id = new HashMap();
-	if (type == ModelConstants.AS_FILE)
-	    isAS=true;
-	else isAS=false;
+        id2id = new HashMap();
+        if (type == ModelConstants.AS_FILE)
+            isAS = true;
+        else isAS = false;
     }
 
     public void convert(String briteFile) {
-    Graph g = parse();
-    Topology t = new Topology(g);
-    BriteExport be = new BriteExport(t, new File(briteFile));
-    be.export();
-  }
+        Graph g = parse();
+        Topology t = new Topology(g);
+        BriteExport be = new BriteExport(t, new File(briteFile));
+        be.export();
+    }
 
     /**
-       When importing the graph structure in the specified topology,
-       the actual NodeIDs are reinitialized and converted to BRITE
-       IDs.  A mapping with the actual file IDs as keys and the BRITE
-       IDs as values is maintained, which this method returns.
-       @return HashMap the mapping */
-
-    public HashMap getIDMap() { return  id2id; }
-    
-     /**
-       Model specific parameters if the import file format specifies
-       it.  If none exist, "" is returned. 
-       @return String  the format specific parameters.
+     * When importing the graph structure in the specified topology,
+     * the actual NodeIDs are reinitialized and converted to BRITE
+     * IDs.  A mapping with the actual file IDs as keys and the BRITE
+     * IDs as values is maintained, which this method returns.
+     *
+     * @return HashMap the mapping
      */
-    public String getFormatParams() { return formatParams; }
-       
 
-    
+    public HashMap getIDMap() {
+        return id2id;
+    }
+
     /**
-       File parsing is done here.
-       @return Graph A BRITE graph containing the topology read in the format.
-    */
-    public Graph parse() {
-	Util.MSG("Parsing Inet format file ");
-	StreamTokenizer toker = new InetTokenizer(br);
-	try {
-	    toker.nextToken();
-	    /*skip the first line*/
-	    while (toker.ttype!=toker.TT_EOL) toker.nextToken();
-	    toker.nextToken();
-	    /*now parse vertices & edges*/
-	    while (toker.ttype!=toker.TT_EOF) {
-		/*now call node parser*/
-		ParseNodes(toker);
-		toker.nextToken();
-		/*now call edge parser*/
-		ParseEdges(toker);
-	    }
-	
-	 
-	
-	    br.close();
-	}
-	catch (IOException e) {
-	    Util.ERR("IO Error at line: " + toker.lineno() + " :" +e.getMessage());
-	}
+     * Model specific parameters if the import file format specifies
+     * it.  If none exist, "" is returned.
+     *
+     * @return String  the format specific parameters.
+     */
+    public String getFormatParams() {
+        return formatParams;
+    }
 
-	/*build topology here */
-	//g.dumpToOutput();
-	//	t = new Topology(g);
-	return g;
+
+    /**
+     * File parsing is done here.
+     *
+     * @return Graph A BRITE graph containing the topology read in the format.
+     */
+    public Graph parse() {
+        Util.MSG("Parsing Inet format file ");
+        StreamTokenizer toker = new InetTokenizer(br);
+        try {
+            toker.nextToken();
+            /*skip the first line*/
+            while (toker.ttype != toker.TT_EOL) toker.nextToken();
+            toker.nextToken();
+            /*now parse vertices & edges*/
+            while (toker.ttype != toker.TT_EOF) {
+                /*now call node parser*/
+                ParseNodes(toker);
+                toker.nextToken();
+                /*now call edge parser*/
+                ParseEdges(toker);
+            }
+
+
+            br.close();
+        } catch (IOException e) {
+            Util.ERR("IO Error at line: " + toker.lineno() + " :" + e.getMessage());
+        }
+
+        /*build topology here */
+        //g.dumpToOutput();
+        //	t = new Topology(g);
+        return g;
     }
 
     private void ParseNodes(StreamTokenizer t) {
-	
-	try {
-	  //    t.nextToken();
-	    boolean firstZero = false;
-	    while (true) {
-		int id =(int)t.nval;
-		if (firstZero && id==0) {
-		  t.pushBack();
-		  break;
-		}  
-		t.nextToken();
-		int x = (int) t.nval; 
-		t.nextToken();
-		int y = (int) t.nval;
-		Node n = new Node();
-		id2id.put(new Integer(id),new Integer(n.getID()));
-		if (isAS)
-		    n.setNodeConf(new ASNodeConf(x,y,0));
-		else
-		    n.setNodeConf(new RouterNodeConf(x,y,0));
-		//	Util.DEBUG("NODE:  "+ id + " " + x + " "+" " +y);
-		g.addNode(n);
-		while (t.ttype != t.TT_EOL) 
-		    t.nextToken();
-		t.nextToken();
-		
-		if (id==0) firstZero=true;
-	    }
-	}
-	catch (IOException e) {
-	    Util.ERR("IO Error at line: " + t.lineno()+ " :" +e.getMessage());
-	}
-    }
-    
-    private void ParseEdges(StreamTokenizer t) {
-	
-	try {
-	
-	    while (true) {
-		int srcID = (int) t.nval;
-		t.nextToken();
-		int dstID = (int) t.nval;
-		t.nextToken();
-		int weight = (int) t.nval;
-		t.nextToken();
 
-		//now create the Edge!
-		int src = ((Integer) id2id.get(new Integer(srcID))).intValue();
-		int dst =((Integer) id2id.get(new Integer(dstID))).intValue();
-		Edge e = new Edge(g.getNodeFromID(src), g.getNodeFromID(dst));
-		
-		if (isAS)
-		    e.setEdgeConf(new ASEdgeConf());
-		else e.setEdgeConf(new RouterEdgeConf());
-		//	Util.DEBUG("EDGE: " + srcID + " " + dstID+ " " + weight);
-		g.addEdge(e);
-		while (t.ttype!=t.TT_EOL)
-		    t.nextToken(); 
-		t.nextToken(); /*next line*/
-		if (t.ttype == t.TT_EOF || t.ttype == t.TT_EOL)
-		    break;
-	    }
-	}
-	catch (IOException e) {
-	    Util.ERR("IO Error at line: " + t.lineno() + " :" + e.getMessage());
-	}
-	
+        try {
+            //    t.nextToken();
+            boolean firstZero = false;
+            while (true) {
+                int id = (int) t.nval;
+                if (firstZero && id == 0) {
+                    t.pushBack();
+                    break;
+                }
+                t.nextToken();
+                int x = (int) t.nval;
+                t.nextToken();
+                int y = (int) t.nval;
+                Node n = new Node();
+                id2id.put(new Integer(id), new Integer(n.getID()));
+                if (isAS)
+                    n.setNodeConf(new ASNodeConf(x, y, 0));
+                else
+                    n.setNodeConf(new RouterNodeConf(x, y, 0));
+                //	Util.DEBUG("NODE:  "+ id + " " + x + " "+" " +y);
+                g.addNode(n);
+                while (t.ttype != t.TT_EOL)
+                    t.nextToken();
+                t.nextToken();
+
+                if (id == 0) firstZero = true;
+            }
+        } catch (IOException e) {
+            Util.ERR("IO Error at line: " + t.lineno() + " :" + e.getMessage());
+        }
+    }
+
+    private void ParseEdges(StreamTokenizer t) {
+
+        try {
+
+            while (true) {
+                int srcID = (int) t.nval;
+                t.nextToken();
+                int dstID = (int) t.nval;
+                t.nextToken();
+                int weight = (int) t.nval;
+                t.nextToken();
+
+                //now create the Edge!
+                int src = ((Integer) id2id.get(new Integer(srcID))).intValue();
+                int dst = ((Integer) id2id.get(new Integer(dstID))).intValue();
+                Edge e = new Edge(g.getNodeFromID(src), g.getNodeFromID(dst));
+
+                if (isAS)
+                    e.setEdgeConf(new ASEdgeConf());
+                else e.setEdgeConf(new RouterEdgeConf());
+                //	Util.DEBUG("EDGE: " + srcID + " " + dstID+ " " + weight);
+                g.addEdge(e);
+                while (t.ttype != t.TT_EOL)
+                    t.nextToken();
+                t.nextToken(); /*next line*/
+                if (t.ttype == t.TT_EOF || t.ttype == t.TT_EOL)
+                    break;
+            }
+        } catch (IOException e) {
+            Util.ERR("IO Error at line: " + t.lineno() + " :" + e.getMessage());
+        }
+
     }
     
     
@@ -227,15 +229,13 @@ public class InetImport {
 }
 
 
-
 class InetTokenizer extends StreamTokenizer {
 
     protected InetTokenizer(Reader r) {
-	super(r);
-	eolIsSignificant(true);
-	
+        super(r);
+        eolIsSignificant(true);
+
     }
- 
 
 
 }

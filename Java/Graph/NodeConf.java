@@ -23,47 +23,81 @@
 /*  Revision:  2.0         4/02/2001                                        */
 /****************************************************************************/
 
-package Graph; 
-
+package Graph;
 
 
 /**
-   NodeConf, short for NodeConfiguration serves as base class for
-   further derivation, see ASNodeConf, RouterNodeConf etc.  All
-   information related to the semantics of the node (such as (x,y)
-   coords etc) should be provided in classes that extend the NodeConf
-   class.  This allows for a clear distinction between a Graph node
-   and a Node in your application.
-*/
+ * NodeConf, short for NodeConfiguration serves as base class for
+ * further derivation, see ASNodeConf, RouterNodeConf etc.  All
+ * information related to the semantics of the node (such as (x,y)
+ * coords etc) should be provided in classes that extend the NodeConf
+ * class.  This allows for a clear distinction between a Graph node
+ * and a Node in your application.
+ */
 public class NodeConf {
-    
-    double cost=0;
+
+    double cost = 0;
     int x, y, z;
     int nodeType;  //ModelConstants.AS_NODE, ModelConstants.RT_NODE
 
-    
-    /** Constructor 1:  default constructor that intializes all NodeConf fields to default values*/
-    public NodeConf() {    }
 
-    /** Constructor 2:  specifies the node "cost" */
-    public NodeConf(double c) { cost=c;}
-    
-    /** Constructor 3:  specifies the x,y,z coords of the node*/
-    public NodeConf(int x, int y, int z) {
-	this.x = x; this.y=y; this.z = z;
+    /**
+     * Constructor 1:  default constructor that intializes all NodeConf fields to default values
+     */
+    public NodeConf() {
     }
-    
+
+    /**
+     * Constructor 2:  specifies the node "cost"
+     */
+    public NodeConf(double c) {
+        cost = c;
+    }
+
+    /**
+     * Constructor 3:  specifies the x,y,z coords of the node
+     */
+    public NodeConf(int x, int y, int z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
     /*get methods*/
-    public double getCost() { return cost; }
-    public int getX() { return x; }
-    public int getY() { return y; }
-    public int getZ() { return z; }
-    public int getNodeType() { return this.nodeType; }
-    
+    public double getCost() {
+        return cost;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getZ() {
+        return z;
+    }
+
+    public int getNodeType() {
+        return this.nodeType;
+    }
+
     /*set methods*/
-    public void setCost(double c) { cost=c;}
-    public void setCoordinates(int x,int y, int z) { this.x = x; this.y=y; this.z=z; }
-    public void setNodeType(int t) { this.nodeType = t;}
+    public void setCost(double c) {
+        cost = c;
+    }
+
+    public void setCoordinates(int x, int y, int z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public void setNodeType(int t) {
+        this.nodeType = t;
+    }
 
 }
 

@@ -26,10 +26,12 @@
 package Graph;
 
 
-/** GraphConstants serves as a repository of constants that our Graph
-    data structure uses.  All constants specific to the "semantics" of
-    the graph (such as router or AS types etc) should be in the
-    ModelConstants class.  */
+/**
+ * GraphConstants serves as a repository of constants that our Graph
+ * data structure uses.  All constants specific to the "semantics" of
+ * the graph (such as router or AS types etc) should be in the
+ * ModelConstants class.
+ */
 final public class GraphConstants {
 
     public static int COLOR_BLACK = 1;
@@ -38,7 +40,7 @@ final public class GraphConstants {
 
     //for edges::
     public static int UNDIRECTED = 0;
-    public static int DIRECTED =1;
+    public static int DIRECTED = 1;
 }
 
 

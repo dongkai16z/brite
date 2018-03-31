@@ -1,13 +1,13 @@
 #BRITE Makefile.  April 2002
 
-all:	c++ java exe  
+all:	buildc++ buildjava exe
  
 clean:  c++clean javaclean guiclean	
 
-c++:
+buildc++:
 	@if test -f C++/Makefile; then\
 	 (cd C++; make) ; \
-	 (make gui);\
+	 (make buildgui);\
 	fi
 
 c++clean:
@@ -15,10 +15,10 @@ c++clean:
 	 (cd C++; make clean); \
 	fi
 
-java:
+buildjava:
 	@if test -f Java/Makefile; then \
 	  (cd Java; make) ; \
-	  (make gui); \
+	  (make buildgui); \
 	fi
 
 javaclean:
@@ -26,7 +26,7 @@ javaclean:
 	  (cd Java; make clean) ;\
 	fi
 
-gui:
+buildgui:
 	@if test -f GUI/Makefile; then \
 	 (cd GUI; make) ; \
 	fi
@@ -39,5 +39,5 @@ guiclean:
 exe:
 	@echo "#!/bin/sh" > brite
 	@echo "" >> brite
-	@echo "java -Xmx256M -classpath Java/:. GUI.Brite" >> brite
+	@echo "java -classpath Java/:GUI/:. GUI.Brite" >> brite
 	@chmod +x brite

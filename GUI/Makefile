@@ -4,5 +4,5 @@ all:
 	javac -O -classpath ../:.:../Java/ *.java
 
 clean: 
-	rm -rf *.class
-	rm -rf *~
+	rm -rf ./GUI/*.class
+	rm -rf ./GUI/*~

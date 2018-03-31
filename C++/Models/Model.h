@@ -28,7 +28,6 @@
 
 #include "../Graph.h"
 #include "../Parser.h"
-#include <algo.h>
 
 using namespace std;
 

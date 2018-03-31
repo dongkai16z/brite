@@ -159,4 +159,4 @@ Temporary Items
 
 # End of https://www.gitignore.io/api/git,c++,java,macos,intellij
 
-brite
+GUI_GEN.conf

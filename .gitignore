@@ -160,3 +160,5 @@ Temporary Items
 # End of https://www.gitignore.io/api/git,c++,java,macos,intellij
 
 GUI_GEN.conf
+seed_file
+last_seed_file

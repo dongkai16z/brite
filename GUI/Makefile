@@ -1,7 +1,7 @@
 #----------------------------- MAKEFILE For Java BRITE GUI
 
 all:
-	javac -O -classpath ../:.:../Java/ *.java
+	javac -Xlint:deprecation -Xlint:unchecked -O -classpath ../:.:../Java/ ./GUI/*.java
 
 clean: 
 	rm -rf ./GUI/*.class

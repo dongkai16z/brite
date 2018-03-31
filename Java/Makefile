@@ -1,6 +1,6 @@
 #----------------------------- MAKEFILE For Java BRITE
 
-JFLAGS=-O -classpath ../:.
+JFLAGS=-O -Xlint:unchecked -Xlint:deprecation -classpath ../:.
 
 all:
 	javac ${JFLAGS} Main/*.java Graph/*.java Model/*.java Import/*.java Export/*.java Util/*.java

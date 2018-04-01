@@ -26,6 +26,8 @@
 #include "Models/Model.h"
 
 
+#include <algorithm>
+
 namespace std {
     class istrstream;
 }

@@ -29,6 +29,8 @@
 #include "../Graph.h"
 #include "../Parser.h"
 
+#include <algorithm>
+
 using namespace std;
 
 enum PlacementType { P_RANDOM = 1, P_HT = 2 };

@@ -9,6 +9,6 @@ For the original documentation please see the [original README file](https://git
 BRITE is available in Java and c++.
 The GUI is only available in Java.
 To build BRITE navigate to the directory and use the makefile to compile.
-Run `make buildc++` to build the c++ algorithm and the Java GUI, `makejava` to build the Java algorithm and GUI, `make buildgui` to only build the GUI or simply `make` to build all components.
+Run `make buildc++` to build the c++ algorithm and the Java GUI, `make buildjava` to build the Java algorithm and GUI, `make buildgui` to only build the GUI or simply `make` to build all components.
 The makefile also generates a *brite* file which can be used by `./brite` to start the BRITE GUI.
 
